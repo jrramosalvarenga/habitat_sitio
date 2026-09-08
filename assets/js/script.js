@@ -44,54 +44,58 @@
 
   // Lightbox gallery
   const lightbox = document.getElementById('lightbox');
-  const lightboxImg = lightbox.querySelector('.lightbox-img');
   const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
-  let currentIndex = 0;
+  if (lightbox && galleryItems.length) {
+    const lightboxImg = lightbox.querySelector('.lightbox-img');
+    let currentIndex = 0;
 
-  const openLightbox = (index) => {
-    currentIndex = index;
-    const item = galleryItems[currentIndex];
-    lightboxImg.src = item.dataset.img;
-    lightboxImg.alt = item.dataset.caption || '';
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-  const closeLightbox = () => {
-    lightbox.classList.remove('open');
-    document.body.style.overflow = '';
-  };
-  const showRelative = (delta) => {
-    currentIndex = (currentIndex + delta + galleryItems.length) % galleryItems.length;
-    const item = galleryItems[currentIndex];
-    lightboxImg.src = item.dataset.img;
-    lightboxImg.alt = item.dataset.caption || '';
-  };
+    const openLightbox = (index) => {
+      currentIndex = index;
+      const item = galleryItems[currentIndex];
+      lightboxImg.src = item.dataset.img;
+      lightboxImg.alt = item.dataset.caption || '';
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeLightbox = () => {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+    const showRelative = (delta) => {
+      currentIndex = (currentIndex + delta + galleryItems.length) % galleryItems.length;
+      const item = galleryItems[currentIndex];
+      lightboxImg.src = item.dataset.img;
+      lightboxImg.alt = item.dataset.caption || '';
+    };
 
-  galleryItems.forEach((item, index) => {
-    item.addEventListener('click', () => openLightbox(index));
-  });
-  lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-  lightbox.querySelector('.lightbox-prev').addEventListener('click', () => showRelative(-1));
-  lightbox.querySelector('.lightbox-next').addEventListener('click', () => showRelative(1));
-  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') showRelative(-1);
-    if (e.key === 'ArrowRight') showRelative(1);
-  });
+    galleryItems.forEach((item, index) => {
+      item.addEventListener('click', () => openLightbox(index));
+    });
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', () => showRelative(-1));
+    lightbox.querySelector('.lightbox-next').addEventListener('click', () => showRelative(1));
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showRelative(-1);
+      if (e.key === 'ArrowRight') showRelative(1);
+    });
+  }
 
   // Contact form -> WhatsApp
   const form = document.getElementById('contactForm');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const nombre = form.nombre.value.trim();
-    const telefono = form.telefono.value.trim();
-    const mensaje = form.mensaje.value.trim();
-    const text = `Hola, soy ${nombre} (Tel: ${telefono}). ${mensaje || 'Quisiera información sobre los lotes disponibles.'}`;
-    const url = `https://wa.me/50495925617?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank', 'noopener');
-  });
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nombre = form.nombre.value.trim();
+      const telefono = form.telefono.value.trim();
+      const mensaje = form.mensaje.value.trim();
+      const text = `Hola, soy ${nombre} (Tel: ${telefono}). ${mensaje || 'Quisiera información sobre los lotes disponibles.'}`;
+      const url = `https://wa.me/50495925617?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank', 'noopener');
+    });
+  }
 
   // Footer year
   document.getElementById('year').textContent = new Date().getFullYear();
