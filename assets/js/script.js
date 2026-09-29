@@ -1,4 +1,7 @@
 (() => {
+  const newsClose = document.querySelector('.news-close');
+  if (newsClose) newsClose.addEventListener('click', () => newsClose.closest('.news-bar').classList.add('hidden'));
+
   const header = document.getElementById('siteHeader');
   const navToggle = document.getElementById('navToggle');
   const mainNav = document.getElementById('mainNav');

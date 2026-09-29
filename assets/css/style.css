@@ -54,6 +54,29 @@ p{ margin:0 0 1em; color:var(--muted); }
 .btn-block{ width:100%; }
 .btn-sm{ padding:.6em 1.1em; font-size:.85rem; }
 
+/* ===== News Bar ===== */
+.news-bar{
+  background:var(--navy); color:#fff; font-size:.88rem; padding:.55em 0;
+  position:relative; z-index:110;
+}
+.news-bar-inner{
+  display:flex; align-items:center; gap:.75em; justify-content:center; flex-wrap:wrap;
+}
+.news-bar p{ margin:0; color:rgba(255,255,255,.9); }
+.news-bar p a{ color:var(--green); font-weight:600; text-decoration:underline; text-underline-offset:2px; }
+.news-bar p a:hover{ color:var(--green-light); }
+.news-badge{
+  background:var(--green); color:#fff; font-size:.7rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.06em; padding:.2em .65em; border-radius:999px;
+  flex-shrink:0;
+}
+.news-close{
+  background:none; border:none; color:rgba(255,255,255,.6); font-size:1.15rem;
+  cursor:pointer; padding:0 .25em; line-height:1; margin-left:.5em;
+}
+.news-close:hover{ color:#fff; }
+.news-bar.hidden{ display:none; }
+
 /* ===== Header ===== */
 .site-header{
   position:fixed; inset-block-start:0; inset-inline:0; z-index:100;
